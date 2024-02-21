@@ -27,6 +27,7 @@ export default function Home() {
       const userAuth = await login(currentUser);
       if (userAuth.status !== 'success') throw new Error('Valió la solicitud', userAuth);
       localStorage.setItem('token', userAuth.token);
+      localStorage.setItem('user', userAuth.user);
       setEmail('');
       setPassword('');
       //console.log(userAuth);

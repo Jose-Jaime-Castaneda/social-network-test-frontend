@@ -1,4 +1,10 @@
-import { loginURL, createUserURL, forYou, logoutURL} from "@/constants/user";
+import {
+    loginURL,
+    createUserURL,
+    forYou,
+    logoutURL,
+    userProfileInfo
+} from "@/constants/user";
 
 export const login = async (user) => {
     try {
@@ -67,6 +73,26 @@ export const getFeed = async (token, page) => {
             method: 'GET',
             headers: {
                 "Authorization": token,
+            },
+        });
+        if (response.ok) {
+            const data = await response.json();
+            return data;
+        } else {
+            throw new Error(response.status);
+        }
+    } catch (error) {
+        console.error('Error en la solicitud', error.message);
+        return error.message;
+    }
+}
+
+export const userProfile = async (token, userID) => {
+    try {
+        const response = await fetch(userProfileInfo + userID, {
+            headers: {
+                method: 'GET',
+                'Authorization': token,
             },
         });
         if (response.ok) {

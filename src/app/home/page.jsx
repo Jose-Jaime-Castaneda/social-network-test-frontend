@@ -8,6 +8,7 @@ import NavBar from "@/components/navbar/navbar";
 export default function Home() {
   const router = useRouter();
   const [token, setToken] = useState(1);
+  const [id, setId] = useState(1);
   const [publications, setPublications] = useState([]);
   const [pages, setPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
@@ -29,18 +30,24 @@ export default function Home() {
     }
   };
 
-  const handleLogout = (token) => {
+  const handleLogout = () => {
     localStorage.removeItem("token");
+    router.push("/");
+  };
+
+  const handleProfile = () => {
     router.push("/");
   };
 
   const fetchData = async () => {
     try {
       const storedToken = localStorage.getItem("token");
+      const storedID = localStorage.getItem("user");
       if (!storedToken) {
         router.push("/");
       } else {
         setToken(storedToken);
+        setId(storedID);
         const fy = await getFeed(storedToken, currentPage);
         setPublications(fy.publicaciones);
         setPages(fy.paginas);
@@ -56,9 +63,15 @@ export default function Home() {
     fetchData();
   }, [currentPage]);
 
+  //console.log(token, "ojoojojojojooojojojoo", id);
+
   return (
     <main className="mainContainer">
-      <NavBar token={token} onLogout={handleLogout} />
+      <NavBar
+        token={token}
+        onLogout={handleLogout}
+        profile={handleProfile}
+      />
       {publications &&
         publications.map((publication) => (
           <article key={publication._id}>
