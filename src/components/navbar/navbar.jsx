@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./styles/navbar.css";
 import { loguot, userProfile } from "@/utils/user";
 
-const NavBar = ({ token, onLogout}) => {
+const NavBar = ({ token, onLogout, profile}) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const handleLogout = () => {
@@ -12,6 +12,7 @@ const NavBar = ({ token, onLogout}) => {
 
   const handleProfile = () => {
     setDropdownVisible(false);
+    profile();
   };
 
   const toggleDropdown = () => {

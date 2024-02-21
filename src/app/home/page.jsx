@@ -32,11 +32,12 @@ export default function Home() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     router.push("/");
   };
 
   const handleProfile = () => {
-    router.push("/");
+    router.push("/user");
   };
 
   const fetchData = async () => {
