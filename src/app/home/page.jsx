@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getFeed } from "@/utils/user";
 import { useRouter } from "next/navigation";
 import "./styles/home.css";
+import NavBar from "@/components/navbar/navbar";
 
 export default function Home() {
   const router = useRouter();
@@ -50,6 +51,7 @@ export default function Home() {
 
   return (
     <main className="mainContainer">
+      <NavBar />
       {publications &&
         publications.map((publication) => (
           <article key={publication._id}>

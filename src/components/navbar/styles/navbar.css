@@ -1,0 +1,17 @@
+.navbar {
+    width: 100%;
+    background-color: #a1ccb3;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 20px;
+}
+
+.navbar>h3 {
+    text-align: center;
+}
+
+.navbarDiv>button{
+    padding: 8px 10px;
+    cursor: pointer;
+}
