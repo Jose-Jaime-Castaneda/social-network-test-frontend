@@ -3,7 +3,8 @@ import {
     createUserURL,
     forYou,
     logoutURL,
-    userProfileInfo
+    userProfileInfo,
+    editUser,
 } from "@/constants/user";
 
 export const login = async (user) => {
@@ -105,6 +106,29 @@ export const userProfile = async (token, userID) => {
         }
     } catch (error) {
         console.error('Error en la solicitud', error.message);
+        return error.message;
+    }
+}
+
+export const editUserInfo = async (token, user) => {
+    try {
+        const response = await fetch(editUser, {
+            method: 'PUT',
+            headers: {
+                'Authorization': token,
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache',
+            },
+            body: JSON.stringify(user),
+        });
+        if (response.ok) {
+            const data = await response.json();
+            return data;
+        } else {
+            const error = await response.json();
+            return error;
+        }
+    } catch (error) {
         return error.message;
     }
 }
