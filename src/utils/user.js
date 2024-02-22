@@ -99,6 +99,8 @@ export const userProfile = async (token, userID) => {
             const data = await response.json();
             return data;
         } else {
+            const error = await response.json();
+            console.log(error);
             throw new Error(response.status);
         }
     } catch (error) {
