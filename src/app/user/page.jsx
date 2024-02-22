@@ -46,6 +46,7 @@ export default function UserInfo() {
       setNewNick('');
       setLastname('');
       setModalVisible(false);
+      localStorage.setItem('token', newUser.token);
     } catch (error) {
       console.error(error);
     }
