@@ -98,19 +98,15 @@ export default function Home() {
             <div className="col">
               <div className="card h-100">
                 <div className="card-header">
-                  <div className="col">
-                    <div className="row publicationHeader">
-                      <img
-                        className="imgProfile"
-                        src={`http://localhost:4000/api/user/profileImg/${publication.user.image}`}
-                        alt="profile-image"
-                      />
-                    </div>
-                    <div className="row">
-                      <h5 className="card-title">
-                        {publication.user.name}, {publication.user.lastname}
-                      </h5>
-                    </div>
+                  <div className="row publicationHeader">
+                    <img
+                      className="imgProfile"
+                      src={`http://localhost:4000/api/user/profileImg/${publication.user.image}`}
+                      alt="profile-image"
+                    />
+                    <h5 className="card-title">
+                      {publication.user.name}, {publication.user.lastname}
+                    </h5>
                   </div>
                 </div>
                 <img

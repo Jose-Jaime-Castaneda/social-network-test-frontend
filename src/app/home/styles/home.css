@@ -16,10 +16,15 @@
 .publicationHeader {
     display: flex;
     align-items: center;
+    flex-wrap: nowrap;
+}
+
+.publicationHeader>img {
+    margin-right: 2px;
 }
 
 .imgProfile {
-    width: 13%;
+    width: 10%;
     margin: 15px;
 }
 
