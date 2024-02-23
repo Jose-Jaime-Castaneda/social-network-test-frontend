@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { userProfile, editUserInfo } from "@/utils/user";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import "./styles/profile.css";
 
 export default function UserInfo() {
@@ -94,7 +95,7 @@ export default function UserInfo() {
             <p className="p2">{user.lastname}</p>
             <p className="p3">({user.nick})</p>
           </div>
-          <button onClick={handleButton}>Volver</button>
+          <Link href={'/home'}>Volver</Link>
           <button onClick={handleEdit}>Editar</button>
         </section>
       )}

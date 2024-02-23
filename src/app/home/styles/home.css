@@ -5,17 +5,12 @@
     flex-direction: column;
     flex-wrap: wrap;
     gap: 15px;
+    width: 100%;
 }
 
-.mainContainer>article {
-    width: 80%;
-    max-width: 600px;
-    height: 45%;
-    max-height: 700px;
-    background-color: #c1c1c1;
-    color: black;
-    border-radius: 5px;
-    border: 1px solid #111;
+.mainCard {
+    width: 90%;
+    max-width: 700px;
 }
 
 .publicationHeader {
@@ -23,28 +18,11 @@
     align-items: center;
 }
 
-.publicationHeader>img {
-    width: 10%;
+.imgProfile {
+    width: 13%;
     margin: 15px;
 }
 
-.nick {
-    margin-left: 5px;
-    font-style: italic;
-    font-size: small;
-}
-
-.publicationBody>p {
-    margin: 10px;
-    border-bottom: 1px solid #a1a1a1;
-}
-
-.publicationBody>img {
+.publicationImg {
     width: 100%;
-}
-
-.publicationFooter>p {
-    font-size: x-small;
-    font-style: italic;
-    margin: 5PX;
 }

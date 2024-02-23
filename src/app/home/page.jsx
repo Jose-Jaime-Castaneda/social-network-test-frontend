@@ -7,6 +7,7 @@ import NavBar from "@/components/navbar/navbar";
 
 export default function Home() {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
   const [token, setToken] = useState(1);
   const [id, setId] = useState(1);
   const [publications, setPublications] = useState([]);
@@ -15,7 +16,8 @@ export default function Home() {
   const [itemsPerPage, setItemsPerPage] = useState(4);
   const [totalItems, setTotalItems] = useState(1);
 
-  const handleNextPage = () => {
+  const handleNextPage = async () => {
+    setIsLoading(true);
     if (currentPage < pages) {
       const nextPage = currentPage + 1;
       setCurrentPage(nextPage);
@@ -23,10 +25,12 @@ export default function Home() {
     }
   };
 
-  const handlePrevPage = () => {
+  const handlePrevPage = async () => {
+    setIsLoading(true);
     if (currentPage > 1) {
       const prevPage = currentPage - 1;
       setCurrentPage(prevPage);
+      fetchData();
     }
   };
 
@@ -54,6 +58,7 @@ export default function Home() {
         setPages(fy.paginas);
         setItemsPerPage(fy.ppp);
         setTotalItems(fy.total);
+        setIsLoading(false);
       }
     } catch (error) {
       console.error("Error al obtener datos:", error);
@@ -62,41 +67,68 @@ export default function Home() {
 
   useEffect(() => {
     fetchData();
-  }, [currentPage]);
+  }, [isLoading]);
 
-  //console.log(token, "ojoojojojojooojojojoo", id);
+  if (isLoading) {
+    return (
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{ height: "100vh" }}
+      >
+        <strong role="status">Loading</strong>
+        <div className="spinner-grow spinner-grow-sm" role="status">
+          <span className="visually-hidden">Loading</span>
+        </div>
+        <div className="spinner-grow spinner-grow-sm" role="status">
+          <span className="visually-hidden">Loading</span>
+        </div>
+        <div className="spinner-grow spinner-grow-sm" role="status">
+          <span className="visually-hidden">Loading</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <main className="mainContainer">
-      <NavBar
-        token={token}
-        onLogout={handleLogout}
-        profile={handleProfile}
-      />
+      <NavBar token={token} onLogout={handleLogout} profile={handleProfile} />
       {publications &&
         publications.map((publication) => (
-          <article key={publication._id}>
-            <div className="publicationHeader">
-              <img
-                src={`http://localhost:4000/api/user/profileImg/${publication.user.image}`}
-                alt="profile-image"
-              />
-              <p>
-                {publication.user.name}, {publication.user.lastname}
-              </p>
-              <p className="nick">{publication.user.nick}</p>
+          <div key={publication.id} className="row mainCard">
+            <div className="col">
+              <div className="card h-100">
+                <div className="card-header">
+                  <div className="col">
+                    <div className="row publicationHeader">
+                      <img
+                        className="imgProfile"
+                        src={`http://localhost:4000/api/user/profileImg/${publication.user.image}`}
+                        alt="profile-image"
+                      />
+                    </div>
+                    <div className="row">
+                      <h5 className="card-title">
+                        {publication.user.name}, {publication.user.lastname}
+                      </h5>
+                    </div>
+                  </div>
+                </div>
+                <img
+                  className="card-img-top publicationImg"
+                  src={`http://localhost:4000/api/publication/get-img/${publication.file}`}
+                  alt="publication img"
+                />
+                <div className="card-body">
+                  <p className="card-text">{publication.text}</p>
+                </div>
+                <div className="card-footer">
+                  <small className="text-body-secondary">
+                    {publication.create_at}
+                  </small>
+                </div>
+              </div>
             </div>
-            <div className="publicationBody">
-              <img
-                src={`http://localhost:4000/api/publication/get-img/${publication.file}`}
-                alt="publication img"
-              />
-              <p>{publication.text}</p>
-            </div>
-            <div className="publicationFooter">
-              <p>{publication.create_at}</p>
-            </div>
-          </article>
+          </div>
         ))}
       {publications && (
         <div className="paginationInfo">
