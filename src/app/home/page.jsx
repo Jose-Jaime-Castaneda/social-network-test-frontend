@@ -4,6 +4,7 @@ import { getFeed } from "@/utils/user";
 import { useRouter } from "next/navigation";
 import "./styles/home.css";
 import NavBar from "@/components/navbar/navbar";
+import Pagination from "@/components/pagination/pagination";
 
 export default function Home() {
   const router = useRouter();
@@ -24,7 +25,6 @@ export default function Home() {
       fetchData();
     }
   };
-
   const handlePrevPage = async () => {
     setIsLoading(true);
     if (currentPage > 1) {
@@ -32,6 +32,10 @@ export default function Home() {
       setCurrentPage(prevPage);
       fetchData();
     }
+  };
+  const handlePageClick = async (pageNumber) => {
+    setIsLoading(true);
+    setCurrentPage(pageNumber);
   };
 
   const handleLogout = () => {
@@ -94,7 +98,7 @@ export default function Home() {
       <NavBar token={token} onLogout={handleLogout} profile={handleProfile} />
       {publications &&
         publications.map((publication) => (
-          <div key={publication.id} className="row mainCard">
+          <div key={publication._id} className="row mainCard">
             <div className="col">
               <div className="card h-100">
                 <div className="card-header">
@@ -127,24 +131,13 @@ export default function Home() {
           </div>
         ))}
       {publications && (
-        <div className="paginationInfo">
-          <p>
-            Página {currentPage} de {pages}
-          </p>
-          <p>
-            Mostrando {itemsPerPage} de {totalItems}
-          </p>
-        </div>
-      )}
-      {publications && (
-        <div className="paginationButtons">
-          <button onClick={handlePrevPage} disabled={currentPage === 1}>
-            {"<"}
-          </button>
-          <button onClick={handleNextPage} disabled={currentPage === pages}>
-            {">"}
-          </button>
-        </div>
+        <Pagination
+          currentPage={currentPage}
+          pages={pages}
+          handlePrevPage={handlePrevPage}
+          handleNextPage={handleNextPage}
+          handlePageClick={handlePageClick}
+        />
       )}
     </main>
   );
