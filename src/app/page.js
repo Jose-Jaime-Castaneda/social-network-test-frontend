@@ -46,11 +46,24 @@ export default function Home() {
         <div className='loginBody'>
           <form onSubmit={handleSubmit}>
             <div className='form-floating mb-3'>
-              <input type='text' id='userEmail' className='form-control' value={email} onChange={handleEmailChange} autoComplete='email' placeholder='Ingrese su correo o nickname' />
+              <input
+                type='text'
+                id='userEmail'
+                className='form-control'
+                value={email}
+                onChange={handleEmailChange}
+                autoComplete='email'
+                placeholder='Ingrese su correo o nickname' />
               <label htmlFor='userEmail' className='text-dark'>Correo electronico o usuario</label>
             </div>
             <div className='form-floating'>
-              <input type='password' className='form-control' id='userPwd' value={password} onChange={handlePasswordChange} placeholder='Ingrese su contraseña' />
+              <input
+                type='password'
+                className='form-control'
+                id='userPwd'
+                value={password}
+                onChange={handlePasswordChange}
+                placeholder='Ingrese su contraseña' />
               <label htmlFor='userPwd' className='text-dark'>Contraseña</label>
             </div>
             <input className='btn btn-primary mt-4' type='submit' value={'Iniciar sesión'} />
