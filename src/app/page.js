@@ -33,7 +33,8 @@ export default function Home() {
       //console.log(userAuth);
       router.push('/home');
     } catch (error) {
-      console.error(error);
+      console.error(error.message);
+      if(error.response) console.log('Mensaje del backend: ', error.response.message);
     }
   }
 

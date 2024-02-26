@@ -16,14 +16,15 @@ export const login = async (user) => {
             },
             body: JSON.stringify(user),
         });
+        const data = await response.json();
         if (response.ok) {
-            const data = await response.json();
             return data;
         } else {
-            throw new Error(response.status);
+            throw new Error(data.error);
         }
     } catch (error) {
-        console.error('Error en la solicitud', error.message);
+        //console.error(error.message);
+        throw error;
     }
 };
 
