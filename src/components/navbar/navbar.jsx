@@ -3,15 +3,10 @@ import React from "react";
 import "./styles/navbar.css";
 import { loguot } from "@/utils/user";
 import { useEffect } from "react";
-import Link from "next/link";
 
 const NavBar = ({ token, onLogout, profile }) => {
   const handleLogout = () => {
     onLogout(loguot(token));
-  };
-
-  const handleProfile = () => {
-    profile();
   };
 
   useEffect(() => {
@@ -54,9 +49,9 @@ const NavBar = ({ token, onLogout, profile }) => {
           <div className="offcanvas-body">
             <ul className="navbar-nav justify-content-end flex-grow-1 pe-3 lista">
               <li className="nav-item">
-                <Link className="nav-link active" href={"/user"}>
+                <a className="nav-link active" onClick={profile}>
                   Perfil
-                </Link>
+                </a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" onClick={handleLogout}>

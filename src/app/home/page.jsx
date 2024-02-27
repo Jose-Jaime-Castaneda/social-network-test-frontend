@@ -10,12 +10,9 @@ export default function Home() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [token, setToken] = useState(1);
-  const [id, setId] = useState(1);
   const [publications, setPublications] = useState([]);
   const [pages, setPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(4);
-  const [totalItems, setTotalItems] = useState(1);
 
   const handleNextPage = async () => {
     setIsLoading(true);
@@ -51,17 +48,13 @@ export default function Home() {
   const fetchData = async () => {
     try {
       const storedToken = localStorage.getItem("token");
-      const storedID = localStorage.getItem("user");
       if (!storedToken) {
         router.push("/");
       } else {
         setToken(storedToken);
-        setId(storedID);
         const fy = await getFeed(storedToken, currentPage);
         setPublications(fy.publicaciones);
         setPages(fy.paginas);
-        setItemsPerPage(fy.ppp);
-        setTotalItems(fy.total);
         setIsLoading(false);
       }
     } catch (error) {
